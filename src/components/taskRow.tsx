@@ -1,28 +1,23 @@
 import React, { ReactNode, useState, useEffect } from "react";
 import { BsTrash3Fill } from "react-icons/bs";
-import { AiFillEdit } from "react-icons/ai";
-import { MdDone } from "react-icons/md";
 import axios from "axios";
 
 interface TaskProps {
-  id: string;
+  id: string; //the id of the task in the database
   task: string; //the text of the task
-  isCompleted: Boolean;
-  //onDelete: () => void; //prop: provided function when the "Delete" button is clicked
+  isCompleted: Boolean; //false -> if not done, true -> if done
 }
 
 //this component represents an individual task item.
 //It includes buttons to complete and delete the task.
 
 function TaskRow({ id, isCompleted, task }: TaskProps) {
-  //state variable: if the task is completed or not.
-  //let [isCompleted, setIsCompleted] = useState(false);
 
-  //this function used the state "isCompleted" and change
+  //this function used the prop "isCompleted" and change
   //his value when the "Complete" button is clicked.
+  //change the value in the database by the id of the task.
 
   const updateComplete = (userid: string) => {
-    //setIsCompleted(!isCompleted);
     axios
       .put("http://localhost:3001/" + userid)
       .then((result) => {
@@ -31,6 +26,8 @@ function TaskRow({ id, isCompleted, task }: TaskProps) {
       .catch((err) => console.log(err));
   };
 
+  //the function delete the task by pressing the "delete" button
+  //according to the id prop of the task
   const deleteTask = (userid: string) => {
     axios
       .delete("http://localhost:3001/" + userid)
@@ -42,7 +39,7 @@ function TaskRow({ id, isCompleted, task }: TaskProps) {
 
   return (
     //className: Applies different styles based on the "isCompleted"
-    //state, and giving a green background for the completed task.
+    //value, and giving a green background for the completed task.
     <div
       className={`form-control border p-3 mt-3${
         isCompleted ? " text-bg-success" : ""

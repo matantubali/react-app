@@ -16,15 +16,6 @@ app.get('/get', async (req, res) => {
     .catch(err => res.json(err))
 })
 
-// app.put('/:userid', (req, res) => {
-//     const {userid} = req.params;
-//     console.log(userid);
-
-//     TaskModel.findOneAndUpdate({_id: userid}, {done: true})
-//     .then(result => res.json(result))
-//     .catch(err => res.json(err))
-// })
-
 app.put('/:userid', (req, res) => {
     const {userid} = req.params;
     console.log(userid);
@@ -37,8 +28,6 @@ app.put('/:userid', (req, res) => {
         .then(result => res.json(result))
         .catch(err => res.json(err))
 })
-
-
 
 app.delete('/:userid', async (req, res) => {
     const {userid} = req.params;

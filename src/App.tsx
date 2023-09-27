@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
 import React from "react";
-import TaskRow from "./components/taskRow";
 import TaskList from "./components/taskList";
 import axios from "axios";
 
@@ -14,11 +13,11 @@ function App() {
   - newTask: track of the text input for adding new tasks.
   */
 
-  //let [tasks, setTasks] = useState<{ id: number; text: string }[]>([]);
   let [tasks, setTasks] = useState([]);
   let [newTask, setNewTask] = useState("");
 
-
+  //get the tasks from the database and push to
+  //the tasks array.
   useEffect(() => {
     axios.get('http://localhost:3001/get')
     .then(result => setTasks(result.data))
@@ -26,11 +25,10 @@ function App() {
   }, [])
  
   const addTask = () => {
-    //Adds a new task to the "tasks" state if the 
+    //insert a new task to the to database if the 
     //input is not empty.
     if (newTask.trim() !== "") {
-      //const newId = tasks.length + 1;
-      
+
       //insert tasks into mongodb
       axios.post('http://localhost:3001/add', {task: newTask})
         .then(result => {
