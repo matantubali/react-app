@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const TodoSchema = new mongoose.Schema({
+const TaskSchema = new mongoose.Schema({
     task: String,
     done: {
         type: Boolean,
@@ -8,5 +8,5 @@ const TodoSchema = new mongoose.Schema({
     }
 })
 
-const TodoModel = mongoose.model("todos", TodoSchema)
-module.exports = TodoModel
+const TaskModel = mongoose.model("task", TaskSchema)
+module.exports = TaskModel

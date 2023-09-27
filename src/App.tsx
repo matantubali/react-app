@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
 import React from "react";
-import TaskRow from "./todolist_app/taskRow";
-import TaskList from "./todolist_app/taskList";
+import TaskRow from "./components/taskRow";
+import TaskList from "./components/taskList";
 import axios from "axios";
 
 function App() {
@@ -29,23 +29,18 @@ function App() {
     //Adds a new task to the "tasks" state if the 
     //input is not empty.
     if (newTask.trim() !== "") {
-      const newId = tasks.length + 1;
-      //setTasks([...tasks, { id: newId, text: newTask }]);
-
+      //const newId = tasks.length + 1;
+      
       //insert tasks into mongodb
       axios.post('http://localhost:3001/add', {task: newTask})
-        .then(result => console.log(result))
+        .then(result => {
+          location.reload()
+        })
         .catch(err => console.log(err))
 
       setNewTask("");
     }
   };
-
-  // const onDelete = (taskId: number) => {
-  //   //Deletes a task based on the provided taskId.
-  //   // const updateTasks = tasks.filter((task) => task.id !== taskId);
-  //   // setTasks(updateTasks);
-  // };
 
   return (
     <div>

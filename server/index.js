@@ -1,7 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
-const TodoModel = require('./models/todo')
+const TaskModel = require('./models/todo')
 
 const app = express()
 
@@ -10,22 +10,30 @@ app.use(express.json())
 
 mongoose.connect('mongodb://127.0.0.1:27017/todolist-mongo')
 
-app.get('/get', (req, res) => {
-    TodoModel.find()
+app.get('/get', async (req, res) => {
+    TaskModel.find()
     .then(result => res.json(result))
     .catch(err => res.json(err))
 })
 
-app.put('/update/:id', (req, res) => {
-    const {id} = req.params;
-    TodoModel.findByIdAndUpdate({_id: id}, {done: true})
+app.put('/:userid', (req, res) => {
+    const {userid} = req.params;
+    console.log(userid);
+    TaskModel.findOneAndUpdate({_id: userid}, {done: true})
     .then(result => res.json(result))
     .catch(err => res.json(err))
 })
 
-app.post('/add', (req, res) => {
+app.delete('/:userid', async (req, res) => {
+    const {userid} = req.params;
+    TaskModel.findOneAndDelete({_id: userid})
+    .then(result => res.json(result))
+    .catch(err => res.json(err))
+})
+
+app.post('/add', async (req, res) => {
     const task = req.body.task;
-    TodoModel.create({
+    TaskModel.create({
         task: task
     }).then(result => res.json(result))
     .catch(err => res.json(err))

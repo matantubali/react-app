@@ -19,6 +19,8 @@ const TaskList = ({ tasks }: TaskListProps) => {
         {tasks.map((task) => (
           <TaskRow
             //key={task}
+            id={task._id}
+            isCompleted={task.done}
             task={task.task}
             //onDelete={() => onDeleteTask(task.id)}
           />
@@ -27,5 +29,5 @@ const TaskList = ({ tasks }: TaskListProps) => {
     </>
   );
 };
-
+//change
 export default TaskList;
