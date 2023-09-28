@@ -3,6 +3,7 @@ import TaskRow from "./taskRow";
 
 interface TaskListProps {
   tasks: any[]; //prop: Array of task objects
+  //type
 }
 
 //this component represent the list of tasks. 
@@ -25,5 +26,5 @@ const TaskList = ({ tasks }: TaskListProps) => {
     </>
   );
 };
-//change
+
 export default TaskList;

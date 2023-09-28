@@ -11,7 +11,7 @@ interface TaskProps {
 //this component represents an individual task item.
 //It includes buttons to complete and delete the task.
 
-function TaskRow({ id, isCompleted, task }: TaskProps) {
+const TaskRow = ({ id, isCompleted, task }: TaskProps) => {
 
   //this function used the prop "isCompleted" and change
   //his value when the "Complete" button is clicked.
@@ -41,14 +41,14 @@ function TaskRow({ id, isCompleted, task }: TaskProps) {
     //className: Applies different styles based on the "isCompleted"
     //value, and giving a green background for the completed task.
     <div
-      className={`form-control border p-3 mt-3${
+      className={`form-control border p-3 mt-3 ${
         isCompleted ? " text-bg-success" : ""
       }`}
     >
       <div className="gap-2 d-md-flex">
         <span
           className={`form-control${
-            isCompleted ? " text-decoration-line-through" : ""
+            isCompleted ? " text-decoration-line-through " : ""
           }`}
         >
           {task}
@@ -59,7 +59,7 @@ function TaskRow({ id, isCompleted, task }: TaskProps) {
             type="button"
             onClick={() => updateComplete(id)}
           >
-            {isCompleted ? "Undo" : "Complete"}
+            {isCompleted ? "Undone" : "Done"}
           </button>
           <button
             className="btn btn-danger"
