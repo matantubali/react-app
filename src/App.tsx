@@ -3,7 +3,7 @@ import "./App.css";
 import TaskList from "./components/taskList";
 import axios from "axios";
 /*
-1. fix completed tasks being calculated for waiting tasks 
+1. fix completed tasks being calculated for waiting tasks - done!
 2. disable add botton when there is no task content - done!
 */
 function App() {
@@ -39,14 +39,21 @@ function App() {
           location.reload();
         })
         .catch((err) => console.log(err));
-        
+
       addedNewTask("");
     }
   };
 
+  const calculateDoneTask = (tasks: any[]) => {
+    let doneTasks = tasks.filter((task) => task.done === true);
+    return doneTasks.length;
+  };
+
   return (
     <>
-      <h1 className="display-4 fw-bold">Pending Tasks ({tasks.length})</h1>
+      <h1 className="display-4 fw-bold">
+        Pending Tasks ({tasks.length - calculateDoneTask(tasks)})
+      </h1>
       <div className="container d-flex col-md-10 mt-4">
         <input
           placeholder="Add new task..."
@@ -58,7 +65,11 @@ function App() {
           }}
         />
 
-        <button onClick={addTask} className="btn btn-primary ms-3" disabled={!newTask}>
+        <button
+          onClick={addTask}
+          className="btn btn-primary ms-3"
+          disabled={!newTask}
+        >
           Add
         </button>
       </div>

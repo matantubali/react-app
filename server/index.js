@@ -42,7 +42,7 @@ app.delete('/:userId', async (req, res) => {
 app.post('/add', async (req, res) => {
     const task = req.body.task;
     TaskModel.create({
-        taskDesc: task
+        task: task
     }).then(result => res.json(result))
     .catch(err => res.status(500).json(err))
 })

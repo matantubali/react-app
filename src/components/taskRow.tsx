@@ -5,21 +5,20 @@ import axios from "axios";
 interface TaskProps {
   id: string; //the id of the task in the database
   task: string; //the text of the task
-  isCompleted: Boolean; //false -> if not done, true -> if done
+  isDone: Boolean; //false -> if not done, true -> if done
 }
 
 //this component represents an individual task item.
 //It includes buttons to complete and delete the task.
 
-const TaskRow = ({ id, isCompleted, task }: TaskProps) => {
-
+const TaskRow = ({ id, isDone, task }: TaskProps) => {
   //this function used the prop "isCompleted" and change
   //his value when the "Complete" button is clicked.
   //change the value in the database by the id of the task.
 
-  const updateComplete = (userid: string) => {
+  const updateComplete = (userId: string) => {
     axios
-      .put("http://localhost:3001/" + userid)
+      .put("http://localhost:3001/" + userId)
       .then((result) => {
         location.reload();
       })
@@ -28,9 +27,9 @@ const TaskRow = ({ id, isCompleted, task }: TaskProps) => {
 
   //the function delete the task by pressing the "delete" button
   //according to the id prop of the task
-  const deleteTask = (userid: string) => {
+  const deleteTask = (userId: string) => {
     axios
-      .delete("http://localhost:3001/" + userid)
+      .delete("http://localhost:3001/" + userId)
       .then((result) => {
         location.reload();
       })
@@ -42,13 +41,13 @@ const TaskRow = ({ id, isCompleted, task }: TaskProps) => {
     //value, and giving a green background for the completed task.
     <div
       className={`form-control border p-3 mt-3 ${
-        isCompleted ? " text-bg-success" : ""
+        isDone ? " text-bg-success" : ""
       }`}
     >
       <div className="gap-2 d-md-flex">
         <span
           className={`form-control${
-            isCompleted ? " text-decoration-line-through " : ""
+            isDone ? " text-decoration-line-through " : ""
           }`}
         >
           {task}
@@ -59,7 +58,7 @@ const TaskRow = ({ id, isCompleted, task }: TaskProps) => {
             type="button"
             onClick={() => updateComplete(id)}
           >
-            {isCompleted ? "Undone" : "Done"}
+            {isDone ? "Undone" : "Done"}
           </button>
           <button
             className="btn btn-danger"
@@ -72,6 +71,6 @@ const TaskRow = ({ id, isCompleted, task }: TaskProps) => {
       </div>
     </div>
   );
-}
+};
 
 export default TaskRow;
