@@ -4,14 +4,14 @@ import axios from "axios";
 
 interface TaskProps {
   id: string; //the id of the task in the database
-  task: string; //the text of the task
+  taskDesc: string; //the text of the task
   isDone: Boolean; //false -> if not done, true -> if done
 }
 
 //this component represents an individual task item.
 //It includes buttons to complete and delete the task.
 
-const TaskRow = ({ id, isDone, task }: TaskProps) => {
+const TaskRow = ({ id, isDone, taskDesc }: TaskProps) => {
   //this function used the prop "isCompleted" and change
   //his value when the "Complete" button is clicked.
   //change the value in the database by the id of the task.
@@ -50,7 +50,7 @@ const TaskRow = ({ id, isDone, task }: TaskProps) => {
             isDone ? " text-decoration-line-through " : ""
           }`}
         >
-          {task}
+          {taskDesc}
         </span>
         <div className="gap-2 d-md-flex justify-content-md-end">
           <button

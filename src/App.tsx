@@ -33,7 +33,7 @@ function App() {
     if (newTask.trim() !== "") {
       //insert tasks into mongodb
       axios
-        .post("http://localhost:3001/add", { task: newTask })
+        .post("http://localhost:3001/add", { taskDesc: newTask })
         .then((result) => {
           //use props for rerendering
           location.reload();
