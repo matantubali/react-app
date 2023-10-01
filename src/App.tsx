@@ -2,40 +2,26 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import TaskList from "./components/taskList";
 import axios from "axios";
-/*
-1. fix completed tasks being calculated for waiting tasks - done!
-2. disable add botton when there is no task content - done!
-*/
+
+
 function App() {
-  /*
-  states:
-  - tasks: track of the array of tasks.
-  - newTask: track of the text input for adding new tasks.
-  */
 
   let [tasks, setTasks] = useState([]);
   let [newTask, addedNewTask] = useState("");
 
-  //get the tasks from the database and push to
-  //the tasks array.
   useEffect(() => {
     console.log("loaded");
-    //use .propeties
     axios
-      .get("http://localhost:3001/get")
+      .get('http://localhost:3001/get')
       .then((result) => setTasks(result.data))
       .catch((err) => console.log(err));
   }, []);
 
   const addTask = () => {
-    //insert a new task to the to database if the
-    //input is not empty.
     if (newTask.trim() !== "") {
-      //insert tasks into mongodb
       axios
         .post("http://localhost:3001/add", { taskDesc: newTask })
         .then((result) => {
-          //use props for rerendering
           location.reload();
         })
         .catch((err) => console.log(err));
