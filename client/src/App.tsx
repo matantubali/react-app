@@ -3,6 +3,11 @@ import "./App.css";
 import TaskList from "./components/taskList";
 import axios from "axios";
 
+export interface TaskDocument {
+  _id: string;
+  taskDesc: string;
+  done: boolean;
+}
 
 function App() {
 
@@ -30,7 +35,7 @@ function App() {
     }
   };
 
-  const calculateDoneTask = (tasks: any[]) => {
+  const calculateDoneTask = (tasks: TaskDocument[]) => {
     let doneTasks = tasks.filter((task) => task.done === true);
     return doneTasks.length;
   };

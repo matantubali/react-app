@@ -1,14 +1,10 @@
 import React, { Fragment } from "react";
 import TaskRow from "./taskRow";
+import { TaskDocument } from "../App";
 
 interface TaskListProps {
-  tasks: any[]; //prop: Array of task objects
-  //type
+  tasks: TaskDocument[]; 
 }
-
-//this component represent the list of tasks.
-// It iterates through tasks and renders each task using
-//the TaskRow component.
 
 const TaskList = ({ tasks }: TaskListProps) => {
   return (
